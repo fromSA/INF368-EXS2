@@ -1,0 +1,19 @@
+You only look once (YOLO) is an object detection system targeted for real-time processing
+YOLO divides the input image into an S×S grid. Each grid cell predicts only one object.
+Each grid cell predicts a fixed number of boundary boxes
+For each grid cell,
+it predicts B boundary boxes and each box has one box confidence score,
+it detects one object only regardless of the number of boxes B,
+it predicts C conditional class probabilities (one per class for the likeliness of the object class).
+![YOLO makes SxS predictions with B boundary boxes.](https://miro.medium.com/max/4226/1*OuMJUWo2rXYA-GYU63NUGw.jpeg)
+
+Each boundary box contains 5 elements: (x, y, w, h) and a box confidence score. 
+ The confidence score reflects how likely the box contains an object (objectness) and how accurate is the boundary box. 
+ We normalize the bounding box width w and height h by the image width and height. x and y are offsets to the corresponding cell. 
+ Hence, x, y, w and h are all between 0 and 1.
+ Each cell has 20 conditional class probabilities. 
+ The conditional class probability is the probability that the detected object belongs to a particular class (one probability per category for each cell). 
+ So, YOLO’s prediction has a shape of (S, S, B×5 + C) = (7, 7, 2×5 + 20) = (7, 7, 30)
+ 
+The class confidence score for each prediction box is computed as:
+It measures the confidence on both the classification and the localization (where an object is located).
